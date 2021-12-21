@@ -91,6 +91,7 @@ export class FindService {
               stopOnFail: true,
             });
 
+            // TODO Try until succeeds
             this.createTrade(openOffer, closeOffer);
           }
         }

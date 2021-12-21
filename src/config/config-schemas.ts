@@ -25,6 +25,7 @@ export const biscointSchema = joi.object({
 export const hasuraSchema = joi.object({
   apiEndpoint: joi.string().required(),
   adminSecret: joi.string().required(),
+  minInterval: positiveIntegerSchema.default(1000),
 });
 
 export const papertrailSchema = joi.object({
@@ -59,6 +60,7 @@ export interface BiscointConfig {
 export interface HasuraConfig {
   apiEndpoint: string;
   adminSecret: string;
+  minInterval: number;
 }
 
 export interface PapertrailConfig {

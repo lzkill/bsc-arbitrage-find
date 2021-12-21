@@ -13,7 +13,8 @@
   },
   "hasura": {
     "apiEndpoint": "",
-    "adminSecret": ""
+    "adminSecret": "",
+    "minInterval": 1000
   },
   "papertrail": {
     "token": "",
