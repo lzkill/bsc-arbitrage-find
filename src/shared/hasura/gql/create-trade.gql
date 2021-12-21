@@ -1,0 +1,5 @@
+mutation createTrade($input: biscoint_trade_insert_input!) {
+  insert_biscoint_trade_one(object: $input) {
+    id
+  }
+}

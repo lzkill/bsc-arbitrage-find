@@ -1,0 +1,21 @@
+schema:
+  - ${HASURA_API_ENDPOINT}:
+      headers:
+        'x-hasura-admin-secret': ${HASURA_ADMIN_SECRET}
+documents: ./src/shared/hasura/**/*.gql
+generates:
+  ./src/shared/hasura/hasura-sdk.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request
+    config:
+      skipTypename: true
+      declarationKind: 'interface'
+      namingConvention:
+        transformUnderscore: true
+      scalars:
+        timestamptz: Date
+hooks:
+  afterAllFileWrite:
+    - 'prettier --write'
