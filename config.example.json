@@ -2,7 +2,7 @@
   "app": {
     "name": "bsc-arbitrage-find",
     "coins": ["BTC", "ETH"],
-    "volume": 1000,
+    "volume": 100,
     "enabled": true
   },
   "biscoint": {
