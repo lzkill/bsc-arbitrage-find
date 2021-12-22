@@ -22,17 +22,13 @@ export class RateLimitedHasuraService {
   }
 
   private setRateLimiter() {
-    try {
-      this.limiter = new Bottleneck({
-        maxConcurrent: 1,
-        minTime: this.config.hasura.minInterval,
-      });
-      this.limiter.on('error', function (error) {
-        this.logger.error(error);
-      });
-    } catch (e) {
-      this.logger.error(e);
-    }
+    this.limiter = new Bottleneck({
+      maxConcurrent: 1,
+      minTime: this.config.hasura.minInterval,
+    });
+    this.limiter.on('error', function (error) {
+      console.error(error);
+    });
   }
 
   createTrade(args) {
