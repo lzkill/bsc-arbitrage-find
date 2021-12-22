@@ -91,7 +91,7 @@ export class FindService {
               stopOnFail: true,
             });
 
-            // TODO Try until succeeds
+            // TODO Try n times
             this.createTrade(openOffer, closeOffer);
           }
         }

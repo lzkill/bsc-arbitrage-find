@@ -35,7 +35,7 @@ export class RateLimitedHasuraService {
     }
   }
 
-  async createTrade(args) {
+  createTrade(args) {
     return this.limiter.schedule(() => this.trades.createTrade(args));
   }
 }
