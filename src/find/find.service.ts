@@ -5,6 +5,7 @@ import { Coin } from 'src/config/config-schemas';
 import { AppConfigService } from 'src/config/config.service';
 import { BrokerService } from 'src/shared/broker/broker.service';
 import { AppLoggerService } from 'src/shared/logger/logger.service';
+import { BackOffPolicy, Retryable } from 'typescript-retry-decorator';
 import { RateLimitedBiscointService } from './rate-limited/biscoint.service';
 import { RateLimitedHasuraService } from './rate-limited/hasura.service';
 
@@ -91,7 +92,6 @@ export class FindService {
               stopOnFail: true,
             });
 
-            // TODO Try n times
             this.createTrade(openOffer, closeOffer);
           }
         }
@@ -103,6 +103,12 @@ export class FindService {
     }
   }
 
+  @Retryable({
+    maxAttempts: 10,
+    backOffPolicy: BackOffPolicy.ExponentialBackOffPolicy,
+    backOff: 1000,
+    exponentialOption: { maxInterval: 5000, multiplier: 2 },
+  })
   private createTrade(openOffer: IOfferResult, closeOffer: IOfferResult) {
     try {
       const args = {
