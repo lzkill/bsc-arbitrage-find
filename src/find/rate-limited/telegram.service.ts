@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import Bottleneck from 'bottleneck';
 import { volumeSchema } from 'src/config/config-schemas';
 import { AppConfigService } from 'src/config/config.service';
 import { AppLoggerService } from 'src/shared/logger/logger.service';
@@ -17,6 +18,7 @@ import {
 @Injectable()
 export class TelegramService {
   private bot: Telegraf;
+  private limiter: Bottleneck;
 
   constructor(
     private config: AppConfigService,
@@ -28,6 +30,8 @@ export class TelegramService {
   }
 
   async init() {
+    this.setRateLimiter();
+
     if (this.config.telegram.token) {
       this.bot.command('baf_start', async (ctx) => {
         try {
@@ -122,16 +126,28 @@ export class TelegramService {
     }
   }
 
+  private setRateLimiter() {
+    this.limiter = new Bottleneck({
+      maxConcurrent: 1,
+      minTime: 5000,
+    });
+    this.limiter.on('error', function (error) {
+      console.error(error);
+    });
+  }
+
   sendMessage(message: string, chatId?: any, removeWhiteSpaces = true) {
     if (this.canChat() && this.config.telegram.enabled) {
       let formatted = message.trim();
       if (removeWhiteSpaces) formatted = this.removeWhiteSpaces(formatted);
-      return this.bot.telegram.sendMessage(
-        chatId ? chatId : this.config.telegram.chatId,
-        formatted,
-        {
-          parse_mode: 'HTML',
-        },
+      return this.limiter.schedule(() =>
+        this.bot.telegram.sendMessage(
+          chatId ? chatId : this.config.telegram.chatId,
+          formatted,
+          {
+            parse_mode: 'HTML',
+          },
+        ),
       );
     }
   }
