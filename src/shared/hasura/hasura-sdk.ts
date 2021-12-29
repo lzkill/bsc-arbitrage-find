@@ -82,6 +82,8 @@ export interface StringComparisonExp {
 
 /** columns and relationships of "biscoint.offer" */
 export interface BiscointOffer {
+  anticipatedAmount?: Maybe<Scalars['String']>;
+  anticipationFeeQuote?: Maybe<Scalars['String']>;
   apiKeyId: Scalars['String'];
   base: Scalars['String'];
   baseAmount: Scalars['String'];
@@ -91,6 +93,7 @@ export interface BiscointOffer {
   expiresAt: Scalars['timestamptz'];
   id: Scalars['Int'];
   isQuote: Scalars['Boolean'];
+  nextRecycleAt?: Maybe<Scalars['timestamptz']>;
   offerId: Scalars['String'];
   op: Scalars['String'];
   quote: Scalars['String'];
@@ -134,6 +137,8 @@ export interface BiscointOfferBoolExp {
   _and?: InputMaybe<Array<BiscointOfferBoolExp>>;
   _not?: InputMaybe<BiscointOfferBoolExp>;
   _or?: InputMaybe<Array<BiscointOfferBoolExp>>;
+  anticipatedAmount?: InputMaybe<StringComparisonExp>;
+  anticipationFeeQuote?: InputMaybe<StringComparisonExp>;
   apiKeyId?: InputMaybe<StringComparisonExp>;
   base?: InputMaybe<StringComparisonExp>;
   baseAmount?: InputMaybe<StringComparisonExp>;
@@ -143,6 +148,7 @@ export interface BiscointOfferBoolExp {
   expiresAt?: InputMaybe<TimestamptzComparisonExp>;
   id?: InputMaybe<IntComparisonExp>;
   isQuote?: InputMaybe<BooleanComparisonExp>;
+  nextRecycleAt?: InputMaybe<TimestamptzComparisonExp>;
   offerId?: InputMaybe<StringComparisonExp>;
   op?: InputMaybe<StringComparisonExp>;
   quote?: InputMaybe<StringComparisonExp>;
@@ -164,6 +170,8 @@ export interface BiscointOfferIncInput {
 
 /** input type for inserting data into table "biscoint.offer" */
 export interface BiscointOfferInsertInput {
+  anticipatedAmount?: InputMaybe<Scalars['String']>;
+  anticipationFeeQuote?: InputMaybe<Scalars['String']>;
   apiKeyId?: InputMaybe<Scalars['String']>;
   base?: InputMaybe<Scalars['String']>;
   baseAmount?: InputMaybe<Scalars['String']>;
@@ -173,6 +181,7 @@ export interface BiscointOfferInsertInput {
   expiresAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
   isQuote?: InputMaybe<Scalars['Boolean']>;
+  nextRecycleAt?: InputMaybe<Scalars['timestamptz']>;
   offerId?: InputMaybe<Scalars['String']>;
   op?: InputMaybe<Scalars['String']>;
   quote?: InputMaybe<Scalars['String']>;
@@ -181,6 +190,8 @@ export interface BiscointOfferInsertInput {
 
 /** aggregate max on columns */
 export interface BiscointOfferMaxFields {
+  anticipatedAmount?: Maybe<Scalars['String']>;
+  anticipationFeeQuote?: Maybe<Scalars['String']>;
   apiKeyId?: Maybe<Scalars['String']>;
   base?: Maybe<Scalars['String']>;
   baseAmount?: Maybe<Scalars['String']>;
@@ -189,6 +200,7 @@ export interface BiscointOfferMaxFields {
   efPrice?: Maybe<Scalars['String']>;
   expiresAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  nextRecycleAt?: Maybe<Scalars['timestamptz']>;
   offerId?: Maybe<Scalars['String']>;
   op?: Maybe<Scalars['String']>;
   quote?: Maybe<Scalars['String']>;
@@ -197,6 +209,8 @@ export interface BiscointOfferMaxFields {
 
 /** aggregate min on columns */
 export interface BiscointOfferMinFields {
+  anticipatedAmount?: Maybe<Scalars['String']>;
+  anticipationFeeQuote?: Maybe<Scalars['String']>;
   apiKeyId?: Maybe<Scalars['String']>;
   base?: Maybe<Scalars['String']>;
   baseAmount?: Maybe<Scalars['String']>;
@@ -205,6 +219,7 @@ export interface BiscointOfferMinFields {
   efPrice?: Maybe<Scalars['String']>;
   expiresAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  nextRecycleAt?: Maybe<Scalars['timestamptz']>;
   offerId?: Maybe<Scalars['String']>;
   op?: Maybe<Scalars['String']>;
   quote?: Maybe<Scalars['String']>;
@@ -235,6 +250,8 @@ export interface BiscointOfferOnConflict {
 
 /** Ordering options when selecting data from "biscoint.offer". */
 export interface BiscointOfferOrderBy {
+  anticipatedAmount?: InputMaybe<OrderBy>;
+  anticipationFeeQuote?: InputMaybe<OrderBy>;
   apiKeyId?: InputMaybe<OrderBy>;
   base?: InputMaybe<OrderBy>;
   baseAmount?: InputMaybe<OrderBy>;
@@ -244,6 +261,7 @@ export interface BiscointOfferOrderBy {
   expiresAt?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
   isQuote?: InputMaybe<OrderBy>;
+  nextRecycleAt?: InputMaybe<OrderBy>;
   offerId?: InputMaybe<OrderBy>;
   op?: InputMaybe<OrderBy>;
   quote?: InputMaybe<OrderBy>;
@@ -257,6 +275,10 @@ export interface BiscointOfferPkColumnsInput {
 
 /** select columns of table "biscoint.offer" */
 export enum BiscointOfferSelectColumn {
+  /** column name */
+  AnticipatedAmount = 'anticipatedAmount',
+  /** column name */
+  AnticipationFeeQuote = 'anticipationFeeQuote',
   /** column name */
   ApiKeyId = 'apiKeyId',
   /** column name */
@@ -276,6 +298,8 @@ export enum BiscointOfferSelectColumn {
   /** column name */
   IsQuote = 'isQuote',
   /** column name */
+  NextRecycleAt = 'nextRecycleAt',
+  /** column name */
   OfferId = 'offerId',
   /** column name */
   Op = 'op',
@@ -287,6 +311,8 @@ export enum BiscointOfferSelectColumn {
 
 /** input type for updating data in table "biscoint.offer" */
 export interface BiscointOfferSetInput {
+  anticipatedAmount?: InputMaybe<Scalars['String']>;
+  anticipationFeeQuote?: InputMaybe<Scalars['String']>;
   apiKeyId?: InputMaybe<Scalars['String']>;
   base?: InputMaybe<Scalars['String']>;
   baseAmount?: InputMaybe<Scalars['String']>;
@@ -296,6 +322,7 @@ export interface BiscointOfferSetInput {
   expiresAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
   isQuote?: InputMaybe<Scalars['Boolean']>;
+  nextRecycleAt?: InputMaybe<Scalars['timestamptz']>;
   offerId?: InputMaybe<Scalars['String']>;
   op?: InputMaybe<Scalars['String']>;
   quote?: InputMaybe<Scalars['String']>;
@@ -325,6 +352,10 @@ export interface BiscointOfferSumFields {
 /** update columns of table "biscoint.offer" */
 export enum BiscointOfferUpdateColumn {
   /** column name */
+  AnticipatedAmount = 'anticipatedAmount',
+  /** column name */
+  AnticipationFeeQuote = 'anticipationFeeQuote',
+  /** column name */
   ApiKeyId = 'apiKeyId',
   /** column name */
   Base = 'base',
@@ -342,6 +373,8 @@ export enum BiscointOfferUpdateColumn {
   Id = 'id',
   /** column name */
   IsQuote = 'isQuote',
+  /** column name */
+  NextRecycleAt = 'nextRecycleAt',
   /** column name */
   OfferId = 'offerId',
   /** column name */
